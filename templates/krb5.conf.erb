@@ -11,14 +11,15 @@
  forwardable = yes
 
 [realms]
- <%= krb5realm %> = {
-  kdc = <%= kdc %>
+ <%= krb5realm.upcase %> = {
+  kdc = <%= kdc %>:88
  }
 
 [domain_realm]
- <%= dnsdomain %> = <%= krb5realm %>
-# spence.org.uk.vm = SPENCE.ORG.UK.VM
- .<%= dnsdomain %> = <%= krb5realm %>
+ <%= dnsdomain %> = <%= krb5realm.upcase %>
+ .<%= dnsdomain %> = <%= krb5realm.upcase %>
+ <%= kdc -%>.<%= dnsdomain -%> = <%= krb5realm.upcase %>
+ .<%= kdc -%>.<%= dnsdomain -%> = <%= krb5realm.upcase %>
 
 [appdefaults]
  pam = {

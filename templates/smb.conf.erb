@@ -1,5 +1,5 @@
 [global]
-  workgroup = <% netbiosdomain.downcase %>
+  workgroup = <%= netbiosdomain.downcase %>
   realm = <%= krb5realm %>
   server string = Samba Server Version %v
   # logs split per machine
