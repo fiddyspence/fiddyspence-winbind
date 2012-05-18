@@ -3,3 +3,5 @@ _____
 
 -  Add support for ssh allow/deny users/groups in the sshd_config template
 -  Add support for an array of krb5 servers
+-  Think about how to control authorized keys ("AuthorizedKeysFile /etc/ssh/%u_key" most likely
+     this enables us to control roots key somewhere, but force password logon for everyone else
