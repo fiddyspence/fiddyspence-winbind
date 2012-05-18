@@ -47,7 +47,13 @@ class winbind (
 )
 {
 
-  include samba
+  include winbind::params
+
+  $package_samba = $winbind::params::package_samba
+
+  package { $package_samba:
+    ensure => 'present',
+  }
 
   File {
     owner => 'root',
