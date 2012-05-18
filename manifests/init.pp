@@ -82,12 +82,17 @@ class winbind (
     subscribe => [File['/etc/nsswitch.conf'],File['/etc/samba/smb.conf']],
   }
 
-  exec { 'domainbind':
-    command => "net ads join -U $username%$password",
-    unless  => "wbinfo -t",
-    path    => '/bin:/usr/bin:/usr/sbin:/sbin',
-    user    => 'root',
-    require => Service['winbind'],
+  case $::winbind_enabled {
+   'false': { 
+     exec { 'domainbind':
+       command => "net ads join -U $username%$password",
+       unless  => "wbinfo -t",
+       path    => '/bin:/usr/bin:/usr/sbin:/sbin',
+       user    => 'root',
+       require => Service['winbind'],
+     }
+   }
+   default : { }
   }
 
 }
