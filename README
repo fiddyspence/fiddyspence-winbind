@@ -2,9 +2,24 @@ winbind
 
 This is the winbind module.
 
+Currently it satisfies the *very specific* example of configuring winbind, krb5
+and PAM to enable SSH via Active Directory authentication
+
+DO NOT USE IT IN ANY OTHER CASE, because it'll blat your samba config, krb5 config
+and make your day unhappy.
+
+If you do want to use it, go ahead, but you should be very aware that it will blat
+
+/etc/samba/smb.conf
+/etc/krb5.conf
+/etc/pam.d/sshd
+/etc/nsswitch.conf
+
+unless you edit the templates up front
+
 License
 -------
-
+See LICENSE file
 
 Contact
 -------
