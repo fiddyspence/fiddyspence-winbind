@@ -47,6 +47,7 @@ class winbind (
 {
 
   include samba
+
   File {
     owner => 'root',
     group => 'root',
@@ -60,6 +61,7 @@ class winbind (
 
   file { '/etc/samba/smb.conf':
     content => template('winbind/smb.conf.erb'),
+    require => Package['samba'],
   }
 
   file { '/etc/krb5.conf':
@@ -71,7 +73,8 @@ class winbind (
   }
 
   service { 'smb':
-    ensure => $smb_ensure,
+    ensure  => $smb_ensure,
+    require => File['/etc/samba/smb.conf'],
   }
 
   service { 'winbind':
@@ -84,6 +87,7 @@ class winbind (
     unless  => "wbinfo -t",
     path    => '/bin:/usr/bin:/usr/sbin:/sbin',
     user    => 'root',
+    require => Service['winbind'],
   }
 
 }
