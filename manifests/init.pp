@@ -37,6 +37,7 @@
 #
 class winbind (
   $smb_ensure = 'false',
+  $ad_ou = '',
   $username,
   $password,
   $netbiosdomain,
@@ -85,7 +86,7 @@ class winbind (
   case $::winbind_enabled {
    'false': { 
      exec { 'domainbind':
-       command => "net ads join -U $username%$password",
+       command => "net ads join ${ad_ou} -U $username%$password",
        unless  => "wbinfo -t",
        path    => '/bin:/usr/bin:/usr/sbin:/sbin',
        user    => 'root',
