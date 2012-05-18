@@ -1,0 +1,41 @@
+[global]
+  workgroup = spence
+  realm = spence.org.uk.vm
+  server string = Samba Server Version %v
+  # logs split per machine
+  # max 50KB per log file, then rotate
+  security = ads
+  passdb backend = tdbsam
+  # the login script name depends on the machine name
+  # the login script name depends on the unix user used
+  # disables profiles support by specifing an empty path
+  load printers = no
+  #  cups options = raw
+
+  # Winbind options here:
+  # separate domain and username with '\', like DOMAIN\username
+  winbind use default domain = true
+  winbind separator = \
+  # use uids from 10000 to 20000 for domain users
+  idmap uid = 10000-20000
+  # use gids from 10000 to 20000 for domain groups
+  idmap gid = 10000-20000
+  # allow enumeration of winbind users and groups
+  winbind enum users = yes
+  winbind enum groups = yes
+  # give winbind users a real shell
+  template homedir = /home/%D/%U
+  template shell = /bin/bash
+
+#[homes]
+  #  comment = Home Directories
+  #  browseable = no
+  #  writable = yes
+
+#[printers]
+  #  comment = All Printers
+  #  path = /var/spool/samba
+  #  browseable = no
+  #  guest ok = no
+  #  writable = no
+  #  printable = yes

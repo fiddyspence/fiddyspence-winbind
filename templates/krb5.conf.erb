@@ -1,0 +1,31 @@
+[logging]
+ default = FILE:/var/log/krb5libs.log
+ kdc = FILE:/var/log/krb5kdc.log
+ admin_server = FILE:/var/log/kadmind.log
+
+[libdefaults]
+ default_realm = SPENCE.ORG.UK.VM
+ dns_lookup_realm = false
+ dns_lookup_kdc = false
+ ticket_lifetime = 24h
+ forwardable = yes
+
+[realms]
+ SPENCE.ORG.UK.VM = {
+  kdc = chris-336fb02c0.spence.org.uk.vm:88
+ }
+
+[domain_realm]
+ .chris-336fb02c0.spence.org.uk.vm = SPENCE.ORG.UK.VM
+ chris-336fb02c0.spence.org.uk.vm = SPENCE.ORG.UK.VM
+ spence.org.uk.vm = SPENCE.ORG.UK.VM
+ .spence.org.uk.vm = SPENCE.ORG.UK.VM
+
+[appdefaults]
+ pam = {
+   debug = false
+   ticket_lifetime = 36000
+   renew_lifetime = 36000
+   forwardable = true
+   krb4_convert = false
+ }
