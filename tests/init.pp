@@ -10,7 +10,7 @@
 #
 class { 'winbind':
   username => 'administrator',
-  password => 'fuckarse',
+  password => 'password',
   netbiosdomain => 'spence',
   dnsdomain => 'spence.org.uk.vm',
   kdc => 'chris-336fb02c0.spence.org.uk.vm',
