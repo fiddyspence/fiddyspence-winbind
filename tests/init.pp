@@ -8,4 +8,11 @@
 #
 # Learn more about module testing here: http://docs.puppetlabs.com/guides/tests_smoke.html
 #
-include winbind
+class { 'winbind':
+  username => 'administrator',
+  password => 'fuckarse',
+  netbiosdomain => 'spence',
+  dnsdomain => 'spence.org.uk.vm',
+  kdc => 'chris-336fb02c0.spence.org.uk.vm',
+  krb5realm => 'spence.org.uk.vm',
+}

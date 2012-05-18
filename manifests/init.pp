@@ -37,6 +37,12 @@
 #
 class winbind (
   $smb_ensure = 'false',
+  $username,
+  $password,
+  $netbiosdomain,
+  $dnsdomain,
+  $kdc,
+  $krb5realm,
 )
 {
 
@@ -52,7 +58,6 @@ class winbind (
    content => template('winbind/nsswitch.conf.erb'),
   }
 
-
   file { '/etc/samba/smb.conf':
     content => template('winbind/smb.conf.erb'),
   }
@@ -62,7 +67,7 @@ class winbind (
   }
 
   file { '/etc/pam.d/sshd':
-    content => tempate('winbind/pam.sshd.erb'),
+    content => template('winbind/pam.sshd.erb'),
   }
 
   service { 'smb':
@@ -72,6 +77,13 @@ class winbind (
   service { 'winbind':
     ensure    => running,
     subscribe => [File['/etc/nsswitch.conf'],File['/etc/samba/smb.conf']],
+  }
+
+  exec { 'domainbind':
+    command => "net ads join -U $username%$password",
+    unless  => "wbinfo -t",
+    path    => '/bin:/usr/bin:/usr/sbin:/sbin',
+    user    => 'root',
   }
 
 }
