@@ -96,7 +96,8 @@ class winbind (
        unless  => "wbinfo -t",
        path    => '/bin:/usr/bin:/usr/sbin:/sbin',
        user    => 'root',
-       require => Service['winbind'],
+       require => Package[$package_samba],
+       notify  => Service['winbind'],
      }
    }
    default : { }
