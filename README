@@ -15,6 +15,8 @@ If you do want to use it, go ahead, but you should be very aware that it will bl
 /etc/pam.d/sshd
 /etc/nsswitch.conf
 
+It also stops nscd, because winbind and nscd don't play nicely together
+
 unless you edit the templates up front
 
 License
