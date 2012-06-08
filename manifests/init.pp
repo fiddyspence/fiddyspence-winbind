@@ -93,6 +93,7 @@ class winbind (
   
   service { 'nscd':
      ensure => stopped,
+     enable => false,
   }
 
   file { '/etc/security/pam_winbind.conf':
