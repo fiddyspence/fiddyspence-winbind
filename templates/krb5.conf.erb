@@ -4,7 +4,7 @@
  admin_server = FILE:/var/log/kadmind.log
 
 [libdefaults]
- default_realm = <%= krb5realm %>
+ default_realm = <%= krb5realm.upcase %>
  dns_lookup_realm = false
  dns_lookup_kdc = false
  ticket_lifetime = 24h
@@ -12,7 +12,7 @@
 
 [realms]
  <%= krb5realm.upcase %> = {
-  kdc = <%= kdc %>:88
+  kdc = <%= kdc -%>.<%= dnsdomain -%>:88
  }
 
 [domain_realm]

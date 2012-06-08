@@ -86,7 +86,12 @@ class winbind (
 
   service { 'winbind':
     ensure    => running,
+    enable    => true,
     subscribe => [File['/etc/nsswitch.conf'],File['/etc/samba/smb.conf']],
+  }
+  
+  service { 'nscd':
+     ensure => stopped,
   }
 
   case $::winbind_enabled {
