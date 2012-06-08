@@ -37,7 +37,11 @@ class winbind::params {
 
   case $::osfamily {
     'redhat': {
-      $package_samba = [ 'samba','krb5-workstation','krb5-libs','pam_krb5' ]
+      if $::operatingsystemrelease =~ /6\./ {
+        $package_samba = [ 'samba','krb5-workstation','krb5-libs','pam_krb5','samba-winbind' ]
+      } else {
+        $package_samba = [ 'samba','krb5-workstation','krb5-libs','pam_krb5' ]
+      }
     }
     default: { fail("Sorry - we don't support your $::{operatingsystem}") }
   }

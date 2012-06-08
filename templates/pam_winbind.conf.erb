@@ -20,7 +20,7 @@
 # (leave empty to just do krb5 authentication but not have a ticket
 # afterwards)
 ;krb5_ccache_type = FILE
-
+mkhomedir = yes
 # make successful authentication depend on membership of one SID
 # (can also take a name)
 <% if be_member_of_SID == "" -%>;<% end -%>require_membership_of = <%= be_member_of_SID %>
