@@ -44,6 +44,7 @@ class winbind (
   $dnsdomain,
   $kdc,
   $krb5realm,
+  $be_member_of_SID = '',
 )
 {
 
@@ -68,7 +69,7 @@ class winbind (
 
   file { '/etc/samba/smb.conf':
     content => template('winbind/smb.conf.erb'),
-    require => Package['samba'],
+    require => Package[$package_samba],
   }
 
   file { '/etc/krb5.conf':
@@ -92,6 +93,11 @@ class winbind (
   
   service { 'nscd':
      ensure => stopped,
+  }
+
+  file { '/etc/security/pam_winbind.conf':
+     content => template('winbind/pam_winbind.conf.erb'),
+     require => Package[$package_samba],
   }
 
   case $::winbind_enabled {
