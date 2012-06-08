@@ -12,14 +12,18 @@
 
 [realms]
  <%= krb5realm.upcase %> = {
-  kdc = <%= kdc -%>.<%= dnsdomain -%>:88
+<% kdc.each do |kdcname| %>
+  kdc = <%= kdcname -%>.<%= dnsdomain -%>:88
+<% end -%>
  }
 
 [domain_realm]
  <%= dnsdomain %> = <%= krb5realm.upcase %>
  .<%= dnsdomain %> = <%= krb5realm.upcase %>
- <%= kdc -%>.<%= dnsdomain -%> = <%= krb5realm.upcase %>
- .<%= kdc -%>.<%= dnsdomain -%> = <%= krb5realm.upcase %>
+<% kdc.each do |kdcname| -%>
+ <%= kdcname -%>.<%= dnsdomain -%> = <%= krb5realm.upcase %>
+ .<%= kdcname -%>.<%= dnsdomain -%> = <%= krb5realm.upcase %>
+<% end -%>
 
 [appdefaults]
  pam = {
