@@ -1,6 +1,6 @@
 [global]
-  workgroup = <%= netbiosdomain.downcase %>
-  realm = <%= krb5realm %>
+  workgroup = <%= @netbiosdomain.downcase %>
+  realm = <%= @krb5realm %>
   server string = Samba Server Version %v
   # logs split per machine
   # max 50KB per log file, then rotate
